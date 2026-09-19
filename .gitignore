@@ -1,0 +1,14 @@
+node_modules/
+.venv/
+__pycache__/
+.cache/
+test-results/
+*.log
+dist/
+release/
+*.zip
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

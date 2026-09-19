@@ -1,0 +1,3 @@
+# Optional, isolated local foreground segmentation. Core editor has no dependencies.
+rembg[cpu]>=2.0.67,<3
+Pillow>=11.3,<13

@@ -1,0 +1,24 @@
+name: Bug report
+description: Tell us what went wrong in Flower.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include what you expected instead. Please do not attach private photos.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: Open the studio, choose a look, then…
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Flower version, browser, operating system, hosted or local
+    validations:
+      required: true

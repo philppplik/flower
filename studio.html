@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#131416" />
+  <meta name="description" content="Turn photographs into character. A private, non-destructive ASCII image studio." />
+  <title>Flower — The creative ASCII studio</title>
+  <link rel="icon" href="./assets/flower-mark.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./src/styles.css" />
+  <link rel="stylesheet" href="./src/studio-theme.css" />
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./" aria-label="Flower home"><img src="./assets/flower-mark.svg" alt="" width="35" height="35" /><span>flower<small>THE ASCII STUDIO</small></span></a>
+    <div class="document-name"><span class="status-dot"></span><span id="filename">Alpine study</span><span class="tag">LOCAL</span></div>
+    <div class="header-actions"><button id="help" class="icon-button" aria-label="Help and keyboard shortcuts">?</button><button id="upload" class="button secondary"><span>↥</span> Open image</button><button id="export-open" class="button primary">Export <span>↗</span></button></div>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar">
+      <div class="sidebar-title"><div><span class="eyebrow">YOUR CREATIVE SPACE</span><h1>Room to play.</h1></div><span class="asterisk">✳</span></div>
+      <div class="tabs" role="tablist" aria-label="Editor panels"><button class="active" role="tab" aria-selected="true" aria-controls="look-panel" id="look-tab" data-panel="look">1 · Create</button><button role="tab" aria-selected="false" aria-controls="mask-panel" id="mask-tab" data-panel="mask">2 · Protect</button></div>
+      <div class="panel-scroll">
+        <section id="look-panel" role="tabpanel" aria-labelledby="look-tab">
+          <div class="section-heading"><h2>Find your starting point</h2><span>01</span></div>
+          <div id="presets" class="presets"></div>
+          <div class="section-heading"><h2>Characters</h2><span>02</span></div>
+          <label class="field-label" for="charset">Character set</label><select id="charset"><option value="classic">Classic</option><option value="cyber">Cyber</option><option value="minimal">Minimal</option><option value="matrix">Binary</option><option value="letters">Letters</option><option value="custom">Custom</option></select>
+          <input id="characters" class="character-input" aria-label="Custom characters" maxlength="64" spellcheck="false" value=" .:-=+*#%@" />
+          <label class="check-row"><input id="autoOrder" type="checkbox" checked /><span>Order by glyph density</span><span class="hint" title="Measures the actual ink coverage of every character.">↕</span></label>
+          <div id="character-controls"></div><details class="advanced"><summary>Character fine-tuning</summary><div id="advanced-character-controls"></div></details>
+          <label class="check-row"><input id="edgeAware" type="checkbox" checked /><span>Follow image edges</span><span class="mini-tag">SMART</span></label>
+          <div class="section-heading"><h2>Color & light</h2><span>03</span></div>
+          <div class="segmented color-modes" aria-label="Color mode"><button data-color="original" class="active">Original</button><button data-color="mono">Mono</button><button data-color="gradient">Gradient</button><button data-color="palette">Palette</button></div>
+          <div class="color-fields"><label>Ink <input id="foreground" type="color" value="#c8f5a4" /></label><label>Shadows <input id="background" type="color" value="#101315" /></label><label id="highlight-label">Highlights <input id="highlight" type="color" value="#ffe5b5" /></label></div>
+          <div id="color-controls"></div>
+          <details class="advanced"><summary>Texture & finishing touches</summary><div id="effect-controls"></div></details>
+          <details class="advanced" id="composition-details"><summary>Blend & transparency</summary><div id="composition-controls"></div>
+          <label class="check-row"><input id="transparent" type="checkbox" /><span>Transparent ASCII background</span></label>
+          </details><div class="preset-actions"><button id="save-preset" class="button secondary">Save look</button><button id="load-preset" class="button secondary">Load look</button><button id="reset" class="text-button">Reset</button></div>
+        </section>
+        <section id="mask-panel" role="tabpanel" aria-labelledby="mask-tab" hidden>
+          <div class="section-heading"><h2>Keep what matters</h2><span>01</span></div><p class="panel-description">Paint a mask to keep your subject’s original pixels. Everything around it becomes ASCII.</p>
+          <label class="field-label" for="mask-mode">Selected regions</label><select id="mask-mode"><option value="protect">Protect from ASCII</option><option value="apply">Apply ASCII only here</option><option value="none">Ignore mask · whole image</option></select>
+          <div class="section-heading"><h2>Selection tools</h2><span>02</span></div>
+          <div class="tool-grid"><button class="tool active" data-tool="brush"><b>◉</b>Brush <kbd>B</kbd></button><button class="tool" data-tool="erase"><b>◇</b>Erase <kbd>E</kbd></button><button class="tool" data-tool="region"><b>✧</b>Color region <kbd>W</kbd></button><button class="tool" data-tool="rectangle"><b>□</b>Rectangle <kbd>R</kbd></button></div>
+          <div id="mask-controls"></div><label class="check-row"><input id="show-mask" type="checkbox" checked /><span>Show selection overlay</span></label>
+          <div class="mask-actions"><button id="undo-mask" class="button secondary">↶ Undo</button><button id="redo-mask" class="button secondary">↷ Redo</button><button id="invert-mask" class="button secondary">Invert</button><button id="clear-mask" class="button secondary">Clear</button></div>
+          <div class="section-heading"><h2>Automatic subject</h2><span class="mini-tag">OPTIONAL</span></div><p class="panel-description">Local AI foreground selection. Detects a subject mask; refine it with the brush.</p><button id="auto-mask" class="button secondary full-width">✧ Select subject</button><p id="ai-status" class="small-note">Checking local model…</p>
+          <div class="section-heading"><h2>Mask files</h2><span>03</span></div><p class="panel-description">Import a grayscale PNG mask. White selects, black leaves unselected.</p><div class="mask-actions"><button id="import-mask" class="button secondary">Import mask</button><button id="download-mask" class="button secondary">Export mask</button></div>
+        </section>
+      </div>
+      <div class="sidebar-footer"><span class="privacy-dot"></span>Made on your device. Stays on your device.</div>
+    </aside>
+    <section class="editor" aria-label="Image editor">
+      <div class="editor-toolbar"><div class="breadcrumb">WORKSPACE <span>/</span> <b id="image-title">Alpine study</b></div><div class="segmented view-switch"><button data-view="original">Original</button><button data-view="split">Compare</button><button data-view="result" class="active">ASCII</button></div><button id="fit" class="text-button" title="Fit image to workspace">Fit to view <span>⌗</span></button></div>
+      <div class="stage" id="stage"><div class="canvas-wrap" id="canvas-wrap"><canvas id="preview" aria-label="ASCII image preview"></canvas><canvas id="overlay" aria-label="Draw selection on image" tabindex="0"></canvas><div id="split-line" hidden><span>↔</span></div><div class="image-badge" id="image-badge">ASCII / LIVE PREVIEW</div></div><div id="drop-zone" hidden>Drop your image here<span>PNG · JPEG · WebP · AVIF</span></div><div class="stage-caption"><span class="corner-cross">+</span><span>ORDINARY PIXELS. EXTRAORDINARY POSSIBILITIES.</span><span class="corner-cross">+</span></div></div>
+      <div class="bottom-toolbar"><div><span class="status-dot"></span><span id="render-status" role="status">Preparing canvas</span><span class="divider">|</span><span id="dimensions">—</span></div><div class="bottom-right"><span id="glyph-count">— characters</span><span class="divider">|</span><span>CANVAS ENGINE <b>01</b></span></div></div>
+      <div class="inspiration"><div><span class="eyebrow">A DIFFERENT KIND OF IMAGE MAKING</span><p>A little wild.<br><em>A lot of character.</em></p></div><div class="tip"><span>✧</span><div><b>Your subject, untouched.</b><p>Open Protect to keep parts of your<br>original image exactly as they are.</p></div></div><button id="demo" class="text-button">Explore the demo <span>↗</span></button></div>
+    </section>
+  </main>
+  <input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,image/avif,image/bmp" hidden />
+  <input id="mask-input" type="file" accept="image/png,image/jpeg,image/webp" hidden />
+  <input id="preset-input" type="file" accept="application/json,.json" hidden />
+  <div id="toast" role="status" hidden></div>
+  <dialog id="export-dialog"><form method="dialog"><div class="dialog-heading"><div><span class="eyebrow">TAKE IT WITH YOU</span><h2>Export your creation.</h2></div><button class="icon-button" aria-label="Close export">×</button></div><p class="panel-description">Rendered locally at your original image resolution.</p><label class="field-label" for="format">Format</label><select id="format"><option value="png">PNG · lossless</option><option value="jpeg">JPEG · compact</option><option value="webp">WebP · modern</option><option value="svg">SVG · editable vector text</option><option value="txt">TXT · plain characters</option></select><label class="field-label" for="export-scale">Output scale</label><select id="export-scale"><option value="1">1× · original resolution</option><option value="2">2× · double resolution</option><option value="0.5">0.5× · half resolution</option></select><p id="export-info" class="small-note"></p><p class="small-note">SVG keeps editable glyphs and embeds the original where needed. TXT contains the full ASCII grid without masks or effects. JPEG flattens transparency.</p><button type="button" id="export-confirm" class="button primary full-width">Download image ↗</button></form></dialog>
+  <dialog id="help-dialog"><form method="dialog"><div class="dialog-heading"><h2>A quick field guide.</h2><button class="icon-button" aria-label="Close help">×</button></div><p>Open an image or use the included alpine illustration. Pick a look, then make it your own.</p><p>In <b>Mask & protect</b>, paint the areas you want to preserve. Color region selects connected pixels with similar color; it is not AI segmentation. Hold <kbd>Shift</kbd> to subtract.</p><p><kbd>B</kbd> Brush · <kbd>E</kbd> Erase · <kbd>W</kbd> Region · <kbd>R</kbd> Rectangle<br><kbd>Ctrl / ⌘ Z</kbd> Undo mask · <kbd>Shift Ctrl / ⌘ Z</kbd> Redo<br><kbd>Space</kbd> Hold to see original</p><p>In Compare view, drag across the image to move the divider. Mask tools work in ASCII view.</p><p>Images stay in this browser. Optional automatic selection sends the image only to the local server. Read README.md for local AI setup and export limits.</p><button type="button" id="restart-tour" class="button secondary full-width">Take the guided tour</button><button class="button primary full-width">Back to creating</button></form></dialog>
+  <dialog id="welcome-dialog" aria-labelledby="welcome-title" aria-describedby="welcome-description">
+    <button id="welcome-skip" class="welcome-close icon-button" aria-label="Skip welcome">×</button>
+    <img class="welcome-flower" src="./assets/flower-mark.svg" width="68" height="68" alt="" />
+    <span class="eyebrow">A SMALL TOOL FOR BIG EXPERIMENTS</span><h2 id="welcome-title">Welcome to Flower.</h2>
+    <p id="welcome-description">Turn a photograph into something with a little more character. Try a look, protect what you love, and make it yours.</p>
+    <ol class="welcome-steps"><li><span>01</span> Pick a look</li><li><span>02</span> Keep your subject</li><li><span>03</span> Export your art</li></ol>
+    <button id="welcome-tour" class="button primary full-width">Show me around <span>→</span></button><button id="welcome-upload" class="button secondary full-width">I’m ready. Open an image</button><p class="welcome-note">No sign-up. No uploads to a cloud. Just you and your pixels.</p>
+  </dialog>
+  <dialog id="tour-dialog" aria-labelledby="tour-title" aria-describedby="tour-description"><div class="tour-highlight" aria-hidden="true"></div><div class="tour-card"><div class="tour-top"><span id="tour-count" class="eyebrow"></span><button id="tour-skip" class="text-button">Skip tour ×</button></div><h2 id="tour-title"></h2><p id="tour-description"></p><div class="tour-actions"><button id="tour-back" class="button secondary">Back</button><button id="tour-next" class="button primary">Next →</button></div></div></dialog>
+</body>
+</html>
