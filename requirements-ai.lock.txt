@@ -9,7 +9,7 @@ jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
 lazy-loader==0.5
 llvmlite==0.49.0
-networkx==3.6.1
+networkx==3.7
 numba==0.67.0
 numpy==2.5.3
 onnxruntime==1.30.0
