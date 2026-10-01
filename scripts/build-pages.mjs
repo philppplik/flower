@@ -10,6 +10,7 @@ await rm(destination, { recursive: true, force: true });
 await mkdir(destination, { recursive: true });
 // Explicit allowlist: never publish the local server, models, uploads, or environment.
 for (const entry of ['index.html', 'studio.html', 'src', 'assets', 'LICENSE', 'impressum.html', 'datenschutz.html', 'CNAME', 'robots.txt', 'sitemap.xml', 'llms.txt']) await cp(path.join(root, entry), path.join(destination, entry), { recursive: true });
+await cp(path.join(root, 'docs/images/studio.png'), path.join(destination, 'social.png'));
 const studioPath = path.join(destination, 'studio.html');
 await writeFile(studioPath, (await readFile(studioPath, 'utf8')).replace('<html lang="en">', '<html lang="en" data-runtime="static">'));
 await writeFile(path.join(destination, '.nojekyll'), '');
