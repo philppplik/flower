@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://flower.philipp-paulik.de/sitemap.xml
