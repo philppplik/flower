@@ -1,0 +1,10 @@
+# Flower
+
+> A private, open-source ASCII image studio by Philipp Paulik.
+
+- [Website](https://flower.philipp-paulik.de/)
+- [Browser studio](https://flower.philipp-paulik.de/studio.html)
+- [Source](https://github.com/philppplik/flower)
+- [Installation](https://github.com/philppplik/flower/blob/main/docs/INSTALLATION.md)
+
+Manual editing and exports stay on the device. Optional AI selection requires the local edition. Exports: PNG, JPEG, WebP, SVG and TXT. MIT license. Still images only.
