@@ -18,5 +18,5 @@
     "build:pages": "node scripts/build-pages.mjs"
   },
   "engines": { "node": ">=22" },
-  "devDependencies": { "playwright": "1.62.1" }
+  "devDependencies": { "playwright": "1.63.0" }
 }
