@@ -8,3 +8,5 @@
 - [Installation](https://github.com/philppplik/flower/blob/main/docs/INSTALLATION.md)
 
 Manual editing and exports stay on the device. Optional AI selection requires the local edition. Exports: PNG, JPEG, WebP, SVG and TXT. MIT license. Still images only.
+
+- Autor / author: Philipp Paulik, https://flower.philipp-paulik.de/entwickler/philipp-paulik/
